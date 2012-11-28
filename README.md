@@ -1,4 +1,7 @@
 js-spa
 ======
 
-Single Page Application » tackle writing a native JavaScript SPA
+Experiment with writing a **native JavaScript SPA**  
+ » based on the [Single Page Web Applications] [1] book
+
+[1]: http://www.manning.com/mikowski/ "Single Page Web Applications: JavaScript end-to-end"
