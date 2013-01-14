@@ -1,22 +1,41 @@
 <!DOCTYPE html>
+<!--
+  spa.html
+  spa application static html
+-->
+
 <html>
   <head>
-    <title>SPA Starter</title>
+    <!-- IE9+ rendering support for latest standards -->
+    <meta content='text/html; charset=ISO-8859-1' http-equiv='Content-Type' />
+    <meta content='IE=edge' http-equiv='X-UA-Compatible' />
+
+    <title>SPA Chapter 4</title>
+
+    <!-- third-party stylesheets -->
+
     <!-- stylesheets -->
-    <link href='css/spa.css' rel='stylesheet' type='text/css' />
-    <link href='css/spa.shell.css' rel='stylesheet' type='text/css' />
+    <link href='css/spa.css'        rel='stylesheet' type='text/css' />
+    <link href='css/spa.chat.css'   rel='stylesheet' type='text/css' />
+    <link href='css/spa.shell.css'  rel='stylesheet' type='text/css' />
+
     <!-- third-party javascript -->
-    <script src='js/jq/jquery-1.8.3.js' type='text/javascript'></script>
+    <script src='js/jq/jquery-1.8.3.js'       type='text/javascript'></script>
     <script src='js/jq/jquery.uriAnchor-1.1.js' type='text/javascript'></script>
+
     <!-- our javascript -->
-    <script src='js/spa.js' type='text/javascript'></script>
-    <script src='js/spa.shell.js' type='text/javascript'></script>
+    <script src='js/spa.js'                   type='text/javascript'></script>
+    <script src='js/spa.util.js'              type='text/javascript'></script>
+    <script src='js/spa.model.js'             type='text/javascript'></script>
+    <script src='js/spa.shell.js'             type='text/javascript'></script>
+    <script src='js/spa.chat.js'              type='text/javascript'></script>
     <script type='text/javascript'>
       //<![CDATA[
-        $(function (){ spa.initModule( $('#spa') ); });
+        $( function () { spa.initModule( $('#spa') ); } );
       //]]>
     </script>
   </head>
+
   <body>
     <div id='spa'></div>
   </body>
