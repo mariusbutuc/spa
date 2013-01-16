@@ -46,13 +46,26 @@ spa.chat = (function () {
 
   //------------------- BEGIN PUBLIC METHODS -------------------
   // Begin public method /configModule/
-  // Purpose    : adjust configuration of allowed keys
-  // Arguments  : A map of settable keys and values
-  //  * color_name - color to use
-  // Settings   :
-  //  * configMap.settable_map declares allowed keys
-  // Returns    : true
-  // Throws     :none
+  //
+  // Example    : spa.chat.configModule({...});
+  // Purpose    : Configure the module prior to initialization
+  // Action     :
+  //  The internal configuration data structure (configMap) is updated
+  //  with provided arguments. No other actions are taken.
+  //  Expected arguments for this module:
+  //    * set_chat_anchor - a method to modify the URI anchor to indicate
+  //        opened or closed state.
+  //        Return false if requested state can't be met
+  //    * chat_model - the Chat model object provides methods to interact
+  //        with our instant messaging
+  //    * people_model - the People model object which provides methods
+  //        to interactwith the list of users the model maintains
+  //    * slider_* settings. All these are optional scalars.
+  //        See mapConfig.mapSettable for a full list
+  //        Example: slider_open_em is the open height in em
+  //  Returns   : none
+  //  Throws    : JavaScript error object and stack trace on unacceptable
+  //              or missing arguments
   //
   configModule = function ( input_map ) {
     spa.util.setConfigMap({
@@ -65,10 +78,19 @@ spa.chat = (function () {
   // End public method /configModule/
 
   // Begin public method /initModule/
-  // Purpose    : Initialize modules
+  //
+  // Example    : spa.chat.initModule( $('#spa') );
+  // Purpose    :
+  //    Directs module to offer its features to the user.
   // Arguments  :
-  //  * $container - the jQuery element used by this feature
-  // Returns    : true
+  //    * append_target - the jQuery DOM element where we will
+  //      append the slider div
+  // Action     :
+  //    Appends a slider div to the provided container and fills
+  //    it with the chat HTML content. It then initializes elements,
+  //    events, and handlers to provide the user with a chat-room
+  //    interface.
+  // Returns    : true on success
   // Throws     : none
   //
   initModule = function ( $container ) {
@@ -78,6 +100,24 @@ spa.chat = (function () {
     return true;
   };
   // End public method /initModule/
+
+  // Begin public method /setSliderPosition/
+  //
+  // Example    : spa.chat.setSliderPosition( 'closed' );
+  // Purpose    : Ensure chat slider is in the requested state
+  // Arguments  :
+  //    * position_type - enum('closed', 'opened', or 'hidden')
+  //    * callback      - optional callback at end of animation.
+  //      (callback receives slider DOM element as argument)
+  // Action     :
+  //    Leaves slider in current state if it matches requested,
+  //    otherwise animate to requested state.
+  // Returns    :
+  //    * true  - requested state achieved
+  //    * false - requested state not achieved
+  // Throws     : none
+  //
+  // End public method /setSliderPosition/
 
   // return public methods
   return {

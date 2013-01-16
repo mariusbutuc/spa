@@ -27,13 +27,12 @@ spa.shell = (function() {
         + '<div class="spa-shell-foot"></div>'
         + '<div class="spa-shell-chat"></div>'
         + '<div class="spa-shell-modal"></div>',
-
-        chat_extrend_time   : 250,
-        chat_extrend_height : 450,
-        chat_extrend_title  : 'Click to retract',
-        chat_retract_time   : 300,
-        chat_retract_height : 15,
-        chat_retract_title  : 'Click to extend'
+      chat_extrend_time   : 250,
+      chat_extrend_height : 450,
+      chat_extrend_title  : 'Click to retract',
+      chat_retract_time   : 300,
+      chat_retract_height : 15,
+      chat_retract_title  : 'Click to extend'
     },
     stateMap = {
       anchor_map        : {},
@@ -188,14 +187,14 @@ spa.shell = (function() {
   // Begin Event handler /onHashchange/
   // Purpose    : Handles the Hashchange event
   // Arguments  :
-  //  * event - jQuery event object
+  //    * event - jQuery event object
   // Settings   : none
   // Returns    : boolean false
   // Action     :
-  //  * Parses the URI anchor component
-  //  * Compares proposed application state with current
-  //  * Adjust the application only where proposed state
-  //    differs from existing
+  //    * Parses the URI anchor component
+  //    * Compares proposed application state with current
+  //    * Adjust the application only where proposed state
+  //      differs from existing
   //
   onHashchange = function ( event ) {
     var
@@ -249,6 +248,24 @@ spa.shell = (function() {
     return false;
   };
   //-------------------- END EVENT HANDLERS --------------------
+
+  //---------------------- BEGIN CALLBACKS ---------------------
+  // Begin callback method /setChatAnchor/
+  //
+  // Example    : setChatAnchor( 'closed' );
+  // Purpose    : Change the chat component of the anchor
+  // Arguments  :
+  //    * position_type - may be 'closed' or 'opened'
+  // Action     :
+  //    Changes the uri anchor parameter 'chat' to the requested
+  //    value, if possible.
+  // Returns    :
+  //    * true  - requested anchor part updated
+  //    * false - requested anchot part not updated
+  // Throws     : none
+  //
+
+  //----------------------- END CALLBACKS ----------------------
 
   //------------------- BEGIN PUBLIC METHODS -------------------
   // Begin Public method /initModule/
