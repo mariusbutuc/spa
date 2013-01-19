@@ -13,7 +13,7 @@ var
   server  = http.createServer(app),
   io      = require( 'socket.io' ).listen( server ),
   routes  = require( './routes.js' )( app ),
-  port    = 1337,
+  port    = process.env.PORT || 1337,
   count   = 0,
   countUp = function () {
     count++;
@@ -41,11 +41,18 @@ app.configure( 'development', function() {
 app.configure( 'production', function () {
   // catch errors, but don't do anything with them
   app.use( express.errorHandler() );
+  // WebSockets are not yet supported on AppFog, nor on Heroku Cedar
+  // force long polling and prevent the use of WebSockets
+  io.configure(function () {
+    io.set("transports", ["xhr-pooling"]);
+    io.set("pooling duration", 10);
+  });
 });
 
 app.use( express.static( __dirname + '/' ) );
 app.set('views', __dirname + '/views' );
 app.set('view engine', 'jade');
+
 
 app.get( '/', function( req, res ){
   res.render( 'index' );
