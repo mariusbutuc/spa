@@ -41,26 +41,31 @@ app.configure( 'development', function() {
 app.configure( 'production', function () {
   // catch errors, but don't do anything with them
   app.use( express.errorHandler() );
-  // WebSockets are not yet supported on AppFog, nor on Heroku Cedar
-  // force long polling and prevent the use of WebSockets
-  io.configure(function () {
-    io.set("transports", ["xhr-pooling"]);
-    io.set("pooling duration", 10);
-  });
 });
 
 app.use( express.static( __dirname + '/' ) );
 app.set('views', __dirname + '/views' );
 app.set('view engine', 'jade');
 
+// WebSockets are not yet supported on AppFog, nor on Heroku Cedar
+// force long polling and prevent the use of WebSockets
+io.configure('production', function () {
+  io.set('transports', ['xhr-polling']);
+  io.set('pooling duration', 10);
+});
+io.configure('development', function () {
+  io.set('transports', ['websocket', 'xhr-polling']);
+  io.enable('log');
+});
+
 
 app.get( '/', function( req, res ){
   res.render( 'index' );
 });
 
-
 setInterval( countUp, 1000 );
 
+
 server.listen(port, function() {
- console.log( 'Listening on ' + port );
+ console.log( 'Running ' + app.settings.env + ' on ' + port );
 });
