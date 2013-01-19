@@ -13,7 +13,7 @@ var
   server  = http.createServer(app),
   io      = require( 'socket.io' ).listen( server ),
   routes  = require( './routes.js' )( app ),
-  port    = 1337,
+  port    = process.env.PORT || 1337,
   count   = 0,
   countUp = function () {
     count++;
@@ -54,5 +54,6 @@ app.get( '/', function( req, res ){
 
 setInterval( countUp, 1000 );
 
-server.listen(port);
-console.log( 'listening on port ' + port );
+server.listen(port, function() {
+ console.log( 'Listening on ' + port );
+});
