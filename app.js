@@ -1,7 +1,26 @@
+/*jslint         browser : true, continue : true,
+  devel  : true, indent  : 2,    maxerr   : 50,
+  newcap : true, nomen   : true, plusplus : true,
+  regexp : true, sloppy  : true, vars     : false,
+  white  : true
+*/
+
 var
-  express = require('express'),
-  app = express(),
-  routes = require( './routes.js' )( app );
+  express = require( 'express' ),
+  http    = require( 'http' ),
+  jade    = require( 'jade' ),
+  app     = express(),
+  server  = http.createServer(app),
+  io      = require( 'socket.io' ).listen( server ),
+  routes  = require( './routes.js' )( app ),
+  port    = 1337,
+  count   = 0,
+  countUp = function () {
+    count++;
+    console.log( count );
+    io.sockets.send( count );
+  }
+;
 
 app.configure( function() {
   // decode forms
@@ -24,5 +43,16 @@ app.configure( 'production', function () {
   app.use( express.errorHandler() );
 });
 
+app.use( express.static( __dirname + '/' ) );
+app.set('views', __dirname + '/views' );
+app.set('view engine', 'jade');
 
-app.listen(3000);
+app.get( '/', function( req, res ){
+  res.render( 'index' );
+});
+
+
+setInterval( countUp, 1000 );
+
+server.listen(port);
+console.log( 'listening on port ' + port );

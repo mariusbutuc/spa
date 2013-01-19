@@ -1,0 +1,32 @@
+!!! 5
+// spa.html
+// spa application static html
+html
+  head
+    // IE9+ rendering support for latest standards
+    meta( 'http-equiv' = 'Content-Type', content = 'text/html; charset=ISO-8859-1' )
+    meta( 'http-equiv' = 'X-UA-Compatible', content = 'IE=edge' )
+    title SPA Chapter 4
+
+    // third-party stylesheets
+
+    // stylesheets
+    link( href = 'css/spa.css',         type = 'text/css', rel = 'stylesheet' )
+    link( href = 'css/spa.chat.css',    type = 'text/css', rel = 'stylesheet' )
+    link( href = 'css/spa.shell.css',   type = 'text/css', rel = 'stylesheet' )
+
+    // third-party javascript
+    script( src = 'js/jq/jquery-1.8.3.js',          type = 'text/javascript' )
+    script( src = 'js/jq/jquery.uriAnchor-1.1.js',  type = 'text/javascript' )
+
+    // our javascript
+    script( src = 'js/spa.js',                      type = 'text/javascript' )
+    script( src = 'js/spa.util.js',                 type = 'text/javascript' )
+    script( src = 'js/spa.model.js',                type = 'text/javascript' )
+    script( src = 'js/spa.shell.js',                type = 'text/javascript' )
+    script( src = 'js/spa.chat.js',                 type = 'text/javascript' )
+    script
+      $( function () { spa.initModule( $('#spa') ); } );
+
+  body
+    #spa

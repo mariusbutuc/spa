@@ -1,4 +1,18 @@
+/*jslint         browser : true, continue : true,
+  devel  : true, indent  : 2,    maxerr   : 50,
+  newcap : true, nomen   : true, plusplus : true,
+  regexp : true, sloppy  : true, vars     : false,
+  white  : true
+*/
+
 module.exports = function( app ) {
+  var objectify = function ( str ) {
+    str = str.slice(0, -1);
+    str = str.charAt(0).toUpperCase() +
+        str.substring(1).toLowerCase();
+    return str;
+  };
+
   // Routes
   app.all( '/:object/*?', function (req, res, next) {
     res.contentType( 'json' );
@@ -6,7 +20,7 @@ module.exports = function( app ) {
   });
 
   // Index
-  app.get( '/:object', function( req, res ) {
+  app.get( '/:object/list/', function( req, res ) {
     res.send( { title : 'List ' + req.params.object } );
   });
 
@@ -32,16 +46,4 @@ module.exports = function( app ) {
     res.send( { title : objectify(req.params.object) +
       ' with id ' + req.params.id + ' deleted' } );
   });
-
-  app.get( '/', function( req, res ){
-    res.send( 'Helllo Express world!' );
-  });
-
-  function objectify ( str ) {
-    str = str.slice(0, -1);
-    str = str.charAt(0).toUpperCase() +
-        str.substring(1).toLowerCase();
-
-    return str;
-  }
 };
