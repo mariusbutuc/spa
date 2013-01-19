@@ -13,7 +13,7 @@ var
   server  = http.createServer(app),
   io      = require( 'socket.io' ).listen( server ),
   routes  = require( './routes.js' )( app ),
-  port    = process.env.PORT || 1337,
+  port    = 1337,
   count   = 0,
   countUp = function () {
     count++;
